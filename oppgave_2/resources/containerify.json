@@ -1,0 +1,8 @@
+{
+  "from": "old-dockerhub.spk.no:5000/base-node/node20-runner:latest",
+  "toImage": "04-containerify:latest",
+  "entrypoint": "node .output/server/index.mjs",
+  "customContent": [
+    ".output"
+  ]
+}
