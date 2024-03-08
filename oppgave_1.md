@@ -52,7 +52,7 @@ ps aux
 ```
 
 for å se hvilke prosesser som kjører inne i imaget.
-Det skal kun være to 
+Det skal kun være to
 — `/bin/bash` og `ps aux`.
 
 I `ubuntu`-containeren kjør
@@ -104,3 +104,45 @@ docker run -it ubuntu:22.04
 
 Legg merke til at filen `grass` ikke finnes lengre.
 Vi har altså startet en ny container.
+
+For å fortsette en container kan du finne den igjen ved å liste opp alle containere
+
+```shell
+docker ps -a
+```
+
+og starte den på navn, e.g.
+
+```shell
+docker start -i <NAME>
+```
+
+Docker tar med andre ord vare på alle containerne vi starter.
+For å unngå å bruke unødvendig plass når du starter containere du vet du ikke ønsker å starte opp igjen kan du
+bruke `--rm` for å fjerne containeren etter oppstart, e.g.
+
+```shell
+docker run --rm old-dockerhub.spk.no:5000/base-java/jre21 java --version
+```
+
+for å raskt sjekke hvilken java-versjon som finnes i en container.
+Legg også merke til at vi her har droppet `-it` flaggene siden vi ikke ønsker å starte containeren interaktivt.
+
+# Opprydding
+
+Docker tar vare på alle imagene du laster ned,
+samt container-sesjoner som vi nettopp såg.
+Dette kan over tid tar veldig mye plass.
+For å slette images som ikke lenger har en tag (taggen kan ha blitt flyttet til et nyere image) kan du kjøre
+
+```shell
+docker image prune
+```
+
+For å slette alle images som ikke har en container assosiert med seg kan du legge til en `-a`.
+
+Samtlige Docker-ressurser kan ryddes opp i ved å kjøre
+
+```shell
+docker system prune -a
+```
