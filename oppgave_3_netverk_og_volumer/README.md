@@ -23,7 +23,7 @@ Start en container og åpne applikasjonen i nettleseren.
 
 ---
 
-I stedet for å binde portenene i vertsmaskinen til containeren så kan vi også fjerne netverk isolasjonen når vi starter containeren, men da mister vi også
+I stedet for å binde portene i vertsmaskinen til containeren så kan vi også fjerne netverk isolasjonen når vi starter containeren, men da mister vi også
 kontrollen over netverket
 
 ```shell
