@@ -1,0 +1,12 @@
+{
+  "name": "steinsakspapir",
+  "version": "1.0.0",
+  "description": "Enkel stein saks papir",
+  "scripts": {
+    "dev": "live-server --no-css-inject --entry-file=src/index.html"
+  },
+  "license": "WTFPL",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}

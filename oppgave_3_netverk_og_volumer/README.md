@@ -66,6 +66,11 @@ I stedet for å lage et volum så kan vi bruke en mappe på vertsmaskinen som et
 docker run -v PATH_TIL_MAPPE_I_VERTSMASKINEN:PATH_TIL_MAPPE_I_CONTAINEREN IMAGE
 ```
 
-## Tips
+---
 
-- Alle pathene være absolutte
+I mange frontend rammeverker kan vi hot reloade kildekoden (endring i kildekoden vises med en gang i nettleseren).
+
+For å kunne benytte hot reloading sammen med docker, kan vi mounte kildekodemappen inn i containeren.
+
+Mount kildekodemappen som et volum og endre på index.html i IDE-en.
+Du skal nå se endringene med en gang i nettleseren.

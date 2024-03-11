@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <title>Stein saks papir</title>
+</head>
+<body>
+<p>Spill</p>
+<button onclick="steinSaksPapir()">Stein</button>
+<button onclick="steinSaksPapir()">Saks</button>
+<button onclick="steinSaksPapir()">Papir</button>
+<p id="resultat"></p>
+</body>
+<script>
+    const resultat = ["Du vant! :)", "Du tapte :(", "Uavgjort"]
+    function steinSaksPapir(){
+        document.getElementById("resultat").innerText = resultat[Math.floor((Math.random()*resultat.length))];
+    }
+</script>
+</html>
