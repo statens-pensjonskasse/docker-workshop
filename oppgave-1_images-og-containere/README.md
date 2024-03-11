@@ -1,4 +1,4 @@
-# 1. Image
+# Images
 
 Hent ned et `ubuntu:22.04`-image
 
@@ -127,8 +127,6 @@ docker run --rm old-dockerhub.spk.no:5000/base-java/jre21 java --version
 
 for å raskt sjekke hvilken java-versjon som finnes i en container.
 Legg også merke til at vi her har droppet `-it` flaggene siden vi ikke ønsker å starte containeren interaktivt.
-
-Du har nok lagt merke til at alle containerene har blitt startet i forgrunnen. For å starte en container i bakgrunnen så kan vi bruker `-d`eller `--detach`.
 
 # Opprydding
 
