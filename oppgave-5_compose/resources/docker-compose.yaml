@@ -1,0 +1,7 @@
+services:
+  dev:
+    image: old-dockerhub.spk.no:5000/base-node/node20-builder
+    ports:
+      - "8080:8080"
+    volumes:
+      - "/data"
