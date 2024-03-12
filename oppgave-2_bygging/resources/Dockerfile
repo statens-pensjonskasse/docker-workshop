@@ -8,6 +8,6 @@ RUN npm run build
 
 FROM old-dockerhub.spk.no:5000/base-node/node20-runner AS runner
 
-CMD ["node", ".output/server/index.mjs"]
+CMD ["node", "./server/index.mjs"]
 
 COPY --from=builder /home/app/build/.output ./

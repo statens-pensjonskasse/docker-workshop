@@ -3,6 +3,6 @@
   "toImage": "04-containerify:latest",
   "entrypoint": "node .output/server/index.mjs",
   "customContent": [
-    ".output"
+    ".output/"
   ]
 }
