@@ -118,6 +118,9 @@ docker start -i <NAME>
 ```
 
 Docker tar med andre ord vare på alle containerne vi starter.
+Hvis du vet at du starter en container du ønsker å gjennoppta sesjonen din i kan du eksplisitt gi den et navn ved å
+bruke `--name <NAME>` for å være enklere å starte opp igjen senere.
+
 For å unngå å bruke unødvendig plass når du starter containere du vet du ikke ønsker å starte opp igjen kan du
 bruke `--rm` for å fjerne containeren etter oppstart, e.g.
 

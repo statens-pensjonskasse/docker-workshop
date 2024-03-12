@@ -168,7 +168,7 @@ For å kunne bygge dette verktøyet uten å ha Go installert lokalt kan du kjør
 ```shell
 docker run --rm \
   --workdir /home/build \
-  --mount type=bind,source=$(pwd),destination=/home/build \
+  --mount type=bind,src=$(pwd),dst=/home/build \
   --pull always \
   -e CGO_ENABLED=0 \
   -e GOOS=darwin \
@@ -179,7 +179,7 @@ docker run --rm \
 Siden vi ikke vet hvilket `workdir` containeren starter i setter vi det eksplisitt med `--workdir /home/build`.
 Dette kan være en hvilken som helst mappe i containeren.
 Når vi vet hvilken mappe vi står i inne i containeren kan vi bind-mounte mappa fra vertsmaskinen inn i den (tomme)
-arbeidsmappa i containeren med `--mount type=bind,source=$(pwd),destination=/home/build`.
+arbeidsmappa i containeren med `--mount type=bind,src=$(pwd),dst=/home/build`.
 Flagget `--pull always` sørger for at vi laster ned siste vesjon av imaget vi bruker.
 Vi sørger også for å sette noen Go-spesifikke miljøvariabler (`-e`) for å statiske lenke C-bibliotek (`CGO_ENABLED=0`)
 og valg av mål-OS (`GOOS=darwin` for Mac, `GOOS=linux` for Linux) og CPU-arkitektur (`GOARCH=arm64` for
@@ -198,3 +198,5 @@ For å installere binærfilen under `/usr/local/bin/` kan du kjøre
 ```shell
 sudo install -o root -g 0 -m 0755 bin/jencli /usr/local/bin/
 ```
+
+på vertsmaskinen.
