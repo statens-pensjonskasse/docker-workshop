@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <title>Stein saks papir</title>
+</head>
+<body>
+<p>Spill</p>
+<button onclick="steinSaksPapir()">Stein</button>
+<button onclick="steinSaksPapir()">Saks</button>
+<button onclick="steinSaksPapir()">Papir</button>
+<p id="resultat">.</p>
+<p>Streak <span id="streak"></span></p>
+<p>Highscore <span id="highscore"></span></p>
+</body>
+<script>
+    const resultat = ["Du vant! :)", "Du tapte :(", "Uavgjort"]
+
+    async function steinSaksPapir(){
+        const idx = Math.floor((Math.random()*resultat.length))
+        document.getElementById("resultat").innerText = resultat[idx];
+
+        if(idx===0){
+            const res = await fetch("http://localhost:8001/inc")
+            const score  = await res.json()
+            updateScore(score)
+        } else if(idx===1){
+            const res = await fetch("http://localhost:8001/reset")
+            const score = await res.json()
+            updateScore(score)
+        }
+    }
+
+    function updateScore(score){
+        document.getElementById("highscore").innerText = score.highscore
+        document.getElementById("streak").innerText = score.streak
+    }
+
+    fetch("http://localhost:8001/")
+        .then(res => res.json())
+        .then(score => updateScore(score))
+</script>
+</html>
