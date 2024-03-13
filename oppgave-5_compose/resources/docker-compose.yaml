@@ -1,7 +1,24 @@
+version: "3.8"
+
 services:
-  dev:
-    image: old-dockerhub.spk.no:5000/base-node/node20-builder
+  frontend:
+    build: ./frontend
     ports:
-      - "8080:8080"
+      - "3000:3000"
+    networks:
+      - app-network
+    environment:
+      - BACKEND_URL=http://backend:8080
+  backend:
+    build: ./backend
+    hostname: backend
+    networks:
+      - app-network
     volumes:
-      - "/data"
+      - high_score_db:/app/db
+
+networks:
+  app-network: { }
+
+volumes:
+  high_score_db: { }
