@@ -64,7 +64,7 @@ Sjekk størrelsen på det bygde imaget
 ```shell
 docker images
 REPOSITORY                                           TAG       IMAGE ID       CREATED          SIZE
-copy-everything                                      latest    a90d10c6d399   48 seconds ago   1.5GB
+01-install-local-and-copy                            latest    a90d10c6d399   48 seconds ago   1.5GB
 old-dockerhub.spk.no:5000/base-node/node20-builder   latest    6da3cbb06aed   5 days ago       1.34GB
 ```
 

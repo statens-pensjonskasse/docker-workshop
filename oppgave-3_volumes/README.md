@@ -67,7 +67,7 @@ dette kalles `bind-mounts`.
 
 Et vanlig bruksområde for `bind-mounts` er i såkalte dev-containers.
 En dev-container er er en container som inneholder alt av byggverktøy man trenger.
-Istedenfor å måtte ha eksakte versjoner av et verk†oy lokalt kan man heller _mounte_ en lokal mappe inn i en container
+Istedenfor å måtte ha eksakte versjoner av et verktøy lokalt kan man heller _mounte_ en lokal mappe inn i en container
 og bruke verktøyene som finnes i containeren for å med filene på vertsmaskinen.
 Det er dette prinsippet JPL CI/CD-pipelines benytter seg av.
 

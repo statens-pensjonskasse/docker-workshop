@@ -88,7 +88,7 @@ Naviger til `resources` mappen og kjør
 ```shell
 docker run -it \
   --workdir /home/$(whoami)/work \
-  --mount type=bind,src=$(pwd),dst=/home/$(whoami)/work,bind-propagation=slave \
+  --mount type=bind,src=$(pwd),dst=/home/$(whoami)/work \
   --mount type=bind,src=$HOME/.npm,dst=/.npm \
   --user $(id -u):$(id -g)\
   --publish 8080:8080 \
