@@ -183,7 +183,7 @@ arbeidsmappa i containeren med `--mount type=bind,src=$(pwd),dst=/home/build`.
 Flagget `--pull always` sørger for at vi laster ned siste vesjon av imaget vi bruker.
 Vi sørger også for å sette noen Go-spesifikke miljøvariabler (`-e`) for å statiske lenke C-bibliotek (`CGO_ENABLED=0`)
 og valg av mål-OS (`GOOS=darwin` for Mac, `GOOS=linux` for Linux) og CPU-arkitektur (`GOARCH=arm64` for
-AARCH64, `GOARCH=amd64` for x86_64). 
+AARCH64, `GOARCH=amd64` for x86_64).
 Vi kjører dette i en container basert på `golang`-imaget med kommandoen `go build -o bin/jencli main.go` for å lage
 en binær fil under `bin/jencli`.
 

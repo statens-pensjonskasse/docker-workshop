@@ -1,12 +1,21 @@
-# Workshop Docker
+# Docker-workshop
 
 Grunnleggende introduksjon til bruk av Docker.
 
-# Dette trenger man
+Se [Dockerkurs.pdf](Dockerkurs.pdf) for slides.
 
-Trenger bare `docker` installert.
+# Kom-i-gang
 
-For Windows og MacOS kan man bruke Rancher Desktop. https://docs.rancherdesktop.io/getting-started/installation. Pass på
-å velge "dockerd (moby)".
+## Windows og Mac
 
-For Linux kan du installere Docker Engine direkte. https://docs.docker.com/engine/install/#server
+Vi har ikke lisens til å bruke Docker Desktop på SPK.
+Et vel så bra alternativ er [Rancher Desktop](https://docs.rancherdesktop.io/getting-started/installation).
+Velg `dockerd (moby)` for å bruke `docker`-kommandoer eller `containerd` hvis du ønsker å
+prøve [nerdctl](https://github.com/containerd/nerdctl).
+
+## Linux
+
+Installer [Docker Engine](https://docs.docker.com/engine/install/#server) direkte,
+eller prøv med [containerd](https://github.com/containerd/containerd)
+og [nerdctl](https://github.com/containerd/nerdctl).
+

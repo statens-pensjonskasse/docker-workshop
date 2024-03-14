@@ -298,7 +298,7 @@ curl -sfLO http://yum.spk.no/pub/pki/spk-root-ca-previous.pem
 $JAVA_HOME/bin/keytool -importcert -cacerts -storepass changeit -noprompt -alias spk -file spk-root-ca-previous.pem
 ```
 
-Klon SI/arkiv-webservice 
+Klon SI/arkiv-webservice
 
 ```shell
 git clone ssh://git@git.spk.no:7999/pu_dok/arkiv-webservice.git
