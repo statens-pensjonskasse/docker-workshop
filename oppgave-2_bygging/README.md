@@ -2,6 +2,8 @@
 
 I denne oppgaven skal vi lage et enkelt docker-image av en Node-applikasjon.
 
+- Last ned [Node.js](https://nodejs.org/en) om du ikke har den installert
+
 Under `resources`-mappen har vi intialisert en Nuxt-applikasjon ved hjelp av
 
 ```shell
