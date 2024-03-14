@@ -87,10 +87,15 @@ kan sees på som et lag over compose for orkestrering av flere applikasjon over 
 
 Docker swarm bruker såkalt `stack`-config som er nesten kompatibel med `compose`
 -config ([GitHub-issue](https://github.com/docker/cli/issues/2527)).
-Disse filene er lagret under `spk-deployment`-mappa i de fleste repoer og du skal med høy sannsynlighet kunne starte de
-ved å kjøre
+Disse filene er lagret under `spk-deployment`-mappa i de fleste repoer og du skal i utgangspunktet kunne starte
+applikasjonen.
+
+Dette er forskjellige fra applikasjon til applikasjon,
+men gjøres ved å enten bruke `base-docker-compose.yaml` eller `docker-compose-local.yaml` dersom denne finnes.
+En tredje mulighet er også å kombinere begge filene der den siste vil erstatte overlappende verdier fra den forrige,
+e.g.
 
 ```shell
-docker compose up -f <base> -f <local>
+docker compose -f base-docker-compose.yaml -f docker-compse-local.yaml up
 ```
 

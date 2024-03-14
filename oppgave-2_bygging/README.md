@@ -2,8 +2,6 @@
 
 I denne oppgaven skal vi lage et enkelt docker-image av en Node-applikasjon.
 
-- Last ned [Node.js](https://nodejs.org/en) om du ikke har den installert
-
 Under `resources`-mappen har vi intialisert en Nuxt-applikasjon ved hjelp av
 
 ```shell
@@ -209,20 +207,23 @@ Legg også merke til at vi ikke ser noe til bygg-steget når vi kjører
 docker history 03-multi-stage
 ```
 
-## Containerify og jib
+## Andre byggverktøy
 
 I SPK har vi begynt å gå vekk fra `Dockerfile`s til fordel for andre verktøy for å bygge images som integrerer bedre med
 byggeverktøyet man ellers bruker.
 For JVM-applikasjoner er dette [jib](https://github.com/GoogleContainerTools/jib) og for Node-applikasjoner har vi
 begynt å bruke [containerify](https://github.com/eoftedal/containerify).
 
-Installer `containerify` som en dev-dependency ved å kjøre
+### Containerify (Node)
+
+Hvis du har [Node.js](https://nodejs.org/en) installert kan du installere `containerify` lokalt i prosjektet som en
+dev-dependency ved å kjøre
 
 ```shell
 npm i --save-dev containerify
 ```
 
-og lag en `containerify.json` fil
+Containerify tar en `containerify.json` fil for konfigurasjon lignende `Dockerfile`.
 
 ```json
 {
@@ -238,6 +239,8 @@ og lag en `containerify.json` fil
 Dette imaget kan nå bygges uten å måtte ta i bruk Docker
 
 ```shell
+npm install
+npm run build
 containerify --folder . --allowInsecureRegistries --toDocker
 ```
 
@@ -249,4 +252,79 @@ REPOSITORY                                           TAG       IMAGE ID       CR
 04-containerify                                      latest    7ea4a8a5a2bb   5 days ago          516MB
 03-multi-stage                                       latest    123a52774065   17 minutes ago      516MB
 old-dockerhub.spk.no:5000/base-node/node20-builder   latest    6da3cbb06aed   5 days ago          1.34GB
+```
+
+### Jib (JVM)
+
+Hvis du har Java installert lokalt kan du bruke `jib` for å lage images.
+Et eksempel på bruk av `jib` kan sees i
+f.eks. [SI/arkiv-webservice](https://git.spk.no/projects/PU_DOK/repos/arkiv-webservice).
+Her finner du image-konfigurasjonen i `pom.xml`-filen
+
+```xml
+
+<plugin>
+    <groupId>com.google.cloud.tools</groupId>
+    <artifactId>jib-maven-plugin</artifactId>
+    <version>${google-jib-maven-plugin.version}</version>
+    <configuration>
+        <from>
+            <image>old-dockerhub.spk.no:5000/base-java/jre${java.version}</image>
+        </from>
+        <to>
+            <image>old-dockerhub.spk.no:5000/${project.artifactId}:local</image>
+        </to>
+        <container>
+            <creationTime>USE_CURRENT_TIMESTAMP</creationTime>
+            <entrypoint>INHERIT</entrypoint>
+            <labels>
+                ...
+            </labels>
+            <environment>
+                ...
+            </environment>
+        </container>
+    </configuration>
+</plugin>
+```
+
+For at `jib` skal kunne hente images fra vårt interne _container registry_ må SPK-sertifikatene være kjent for Java.
+Disse kan legges til ved å kjøre
+
+```shell
+curl -sfLO http://yum.spk.no/pub/pki/spk-root-ca-current.pem 
+$JAVA_HOME/bin/keytool -importcert -cacerts -storepass changeit -noprompt -alias spk -file spk-root-ca-current.pem
+curl -sfLO http://yum.spk.no/pub/pki/spk-root-ca-previous.pem
+$JAVA_HOME/bin/keytool -importcert -cacerts -storepass changeit -noprompt -alias spk -file spk-root-ca-previous.pem
+```
+
+Klon SI/arkiv-webservice 
+
+```shell
+git clone ssh://git@git.spk.no:7999/pu_dok/arkiv-webservice.git
+```
+
+og kjør
+
+```shell
+mvn compile jib:dockerBuild
+```
+
+for å bygge et image av `arkiv-webservice` lokalt.
+
+Legg merke til rekkefølgen på lagene i imaget `jib` lager
+
+```shell
+docker history old-dockerhub.spk.no:5000/arkiv-webservice:local
+```
+
+```shell
+
+IMAGE          CREATED              CREATED BY                   SIZE      COMMENT
+97929093da49   About a minute ago   jib-maven-plugin:3.4.1       6.58kB    jvm arg files
+<missing>      About a minute ago   jib-maven-plugin:3.4.1       1.21MB    classes
+<missing>      About a minute ago   jib-maven-plugin:3.4.1       8.6kB     resources
+<missing>      About a minute ago   jib-maven-plugin:3.4.1       71.1MB    dependencies
+<missing>      4 days ago           CMD ["./start.sh"]           0B        buildkit.dockerfile.v0
+...
 ```
