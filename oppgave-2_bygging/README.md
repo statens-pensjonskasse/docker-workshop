@@ -220,7 +220,7 @@ Hvis du har [Node.js](https://nodejs.org/en) installert kan du installere `conta
 dev-dependency ved å kjøre
 
 ```shell
-npm i --save-dev containerify
+npm i -g containerify
 ```
 
 Containerify tar en `containerify.json` fil for konfigurasjon lignende `Dockerfile`.
