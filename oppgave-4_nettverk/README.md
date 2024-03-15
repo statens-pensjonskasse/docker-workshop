@@ -86,7 +86,7 @@ Mange frontend-rammeverk støtter såkalt _hot-reloading_ av kildekoden
 Naviger til `resources` mappen og kjør
 
 ```shell
-docker run -it \
+docker run -it --rm \
   --workdir /home/$(whoami)/work \
   --mount type=bind,src=$(pwd),dst=/home/$(whoami)/work \
   --mount type=bind,src=$HOME/.npm,dst=/.npm \
