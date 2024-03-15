@@ -171,10 +171,16 @@ docker run --rm \
   --mount type=bind,src=$(pwd),dst=/home/build \
   --pull always \
   -e CGO_ENABLED=0 \
-  -e GOOS=darwin \
-  -e GOARCH=arm64 \
+  -e GOOS='darwin|linux|windows' \
+  -e GOARCH='arm64|amd64' \
   golang go build -o bin/jencli main.go 
 ```
+
+Pass på å velge mål-OS (`GOOS`) og CPU-arkitektur (`GOARCH`) basert maskinen du bruker.
+
+- `darwin` for Mac
+- `amd64` for Intel og AMD
+- `arm64` for Apple Silicon
 
 Siden vi ikke vet hvilket `workdir` containeren starter i setter vi det eksplisitt med `--workdir /home/build`.
 Dette kan være en hvilken som helst mappe i containeren.
@@ -182,8 +188,7 @@ Når vi vet hvilken mappe vi står i inne i containeren kan vi bind-mounte mappa
 arbeidsmappa i containeren med `--mount type=bind,src=$(pwd),dst=/home/build`.
 Flagget `--pull always` sørger for at vi laster ned siste vesjon av imaget vi bruker.
 Vi sørger også for å sette noen Go-spesifikke miljøvariabler (`-e`) for å statiske lenke C-bibliotek (`CGO_ENABLED=0`)
-og valg av mål-OS (`GOOS=darwin` for Mac, `GOOS=linux` for Linux) og CPU-arkitektur (`GOARCH=arm64` for
-AARCH64, `GOARCH=amd64` for x86_64).
+og valg av mål-OS (`GOOS`) og CPU-arkitektur (`GOARCH`).
 Vi kjører dette i en container basert på `golang`-imaget med kommandoen `go build -o bin/jencli main.go` for å lage
 en binær fil under `bin/jencli`.
 
