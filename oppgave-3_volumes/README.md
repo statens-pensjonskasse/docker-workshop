@@ -35,6 +35,8 @@ Kjør opp en ny container med
 docker run -it --rm --mount source=forest,destination=/mnt ubuntu:22.04
 ```
 
+- På Windows må det være `destination=//mnt`
+
 Her har vi lagt til `-it` for å starte en interaktiv sesjon med TTY og `--rm` for å rydde opp i containeren når sesjonen
 er ferdig.
 
