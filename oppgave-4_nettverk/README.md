@@ -86,7 +86,7 @@ Mange frontend-rammeverk støtter såkalt _hot-reloading_ av kildekoden
 Naviger til `resources` mappen og kjør
 
 ```shell
-docker run -it --rm \
+docker run -it \
   --workdir /home/$(whoami)/work \
   --mount type=bind,src=$(pwd),dst=/home/$(whoami)/work \
   --mount type=bind,src=$HOME/.npm,dst=/.npm \
@@ -97,13 +97,14 @@ docker run -it --rm \
   bash
 ```
 
+- Containeren får navnet `node20-builder` slik at vi enkelt kan gjennoppta sesjonen med `docker start -i <NAME>`.
+
 Her setter vi `workdir` til en ny mappe i containeren med samme navn som din lokale bruker (`whoami`) og `bind`-mounter
 _working directory_ fra vertsmaskinen inn i denne mappa.
 Deretter `bind`-mounter vi den lokale `npm` cache mappa inn i containeren for å gjenbruke cachen og unngå problemer med
 filrettigheter.
 Vi setter brukeren til å være den samme som på vertsmaskinen (`id -u`) og gruppe (`id -g`) og publiserer port `8080` fra
 containeren til port `8080` på vertsmaskinen.
-Containeren får navnet `node20-builder` slik at vi enkelt kan gjennoppta sesjonen.
 Vi bruker `old-dockerhub.spkno:5000/base-node/node20-builder` imaget og starter et skall med `bash`.
 
 Vi har nå vår helt egen _dev-container_ for dette prosjektet.
