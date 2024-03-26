@@ -8,8 +8,6 @@ Under `resources`-mappen har vi intialisert en Nuxt-applikasjon ved hjelp av
 npx nuxi@latest init
 ```
 
-Du trenger ikke å installere Node lokalt på PCen din siden vi skal bygge applikasjonen ved hjelp av Docker.
-
 Vi har også lagt inn en enkel `Dockerfile` i mappa som vi skal bruke videre.
 
 ```Dockerfile
@@ -17,7 +15,7 @@ FROM old-dockerhub.spk.no:5000/base-node/node20-builder
 ```
 
 Her begynner vi med det SPK-spesifikke `node20-builder` base-imaget.
-Ta gjerne å undersøke det ved å bruke `docker history` og `docker inspect`.
+Undersøk gjerne imaget det ved å bruke `docker history` og `docker inspect`.
 
 Dette base-imaget er basert på `Rocky Linux` med SPK sine rotsertifikater.
 Vi har også installert Node 20 for å kunne bygge og kjøre Node applikasjoner,
@@ -86,7 +84,7 @@ Vi kan gjøre bedre!
 Istedenfor å kopiere inn hele imaget så kan vi være litt mer selektiv med hva vi kopierer inn.
 Vi ønsker også å benytte oss av caching av image lag for å kunne bygge imaget raskere neste gang
 
-Endre `Dockerfile til`
+Endre `Dockerfile` til
 
 ```Dockerfile
 FROM old-dockerhub.spk.no:5000/base-node/node20-builder
@@ -101,8 +99,7 @@ CMD ["npm", "run", "dev"]
 ```
 
 Her kopierer vi først inn kun `package.json` og `package-lock.json`.
-Vi kan deretter kjøre (`RUN`) `npm clean-install` for å installere npm-pakker akkurat slik de er definert i
-`package-lock.json`.
+Vi kan deretter kjøre (`RUN`) `npm clean-install` for å installere npm-pakker definert i `package-lock.json`.
 
 Etter å ha installert alle avhengigheter kopierer vi inn kildekoden.
 
@@ -125,9 +122,10 @@ REPOSITORY                                           TAG       IMAGE ID       CR
 old-dockerhub.spk.no:5000/base-node/node20-builder   latest    6da3cbb06aed   5 days ago       1.34GB
 ```
 
-Antageligvis har dette noe med størrelse på avhengigheter på arm64 og amd64 arkitektur.
+Dette kommer sannsynligvis av at `npm i`/`npm ci` installerer noen pakker globalt (under `$HOME/.npm`) som ikke blir med
+i det forrige imaget vi lagde.
 
-Fordelen er nå at vi ikke trenger å ha Node installert lokalt.
+Fordelen er at vi nå ikke trenger å ha Node installert lokalt.
 
 ### .dockerignore
 
@@ -220,10 +218,10 @@ Hvis du har [Node.js](https://nodejs.org/en) installert kan du installere `conta
 dev-dependency ved å kjøre
 
 ```shell
-npm i -g containerify
+npm i --save-dev containerify
 ```
 
-Containerify tar en `containerify.json` fil for konfigurasjon lignende `Dockerfile`.
+Containerify bruker en `containerify.json`-fil for konfigurasjon lignende `Dockerfile`.
 
 ```json
 {
@@ -236,15 +234,25 @@ Containerify tar en `containerify.json` fil for konfigurasjon lignende `Dockerfi
 }
 ```
 
-Dette imaget kan nå bygges uten å måtte ta i bruk Docker
+Ved å legge til konfigurasjonen over i `containerify.json` samt en linje for `containerify` under `scripts`
+i `package.json`
+
+```json
+"scripts": {
+  ...
+  "containerify": "containerify --folder . --allowInsecureRegistries --toDocker"
+}
+```
+
+kan vi nå bygge dette prosjektet til et image uten å måtte ta i bruk Docker
 
 ```shell
 npm install
 npm run build
-containerify --folder . --allowInsecureRegistries --toDocker
+npm run containerify
 ```
 
-og det vil ha samme størrelse som multi-stage bygget vi gjorde tidligere
+Dette imaget vil ha samme størrelse som multi-stage bygget vi lagde tidligere
 
 ```shell
 docker images

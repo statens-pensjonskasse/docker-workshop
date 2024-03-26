@@ -97,14 +97,13 @@ docker run -it \
   bash
 ```
 
-- Containeren får navnet `node20-builder` slik at vi enkelt kan gjennoppta sesjonen med `docker start -i <NAME>`.
-
 Her setter vi `workdir` til en ny mappe i containeren med samme navn som din lokale bruker (`whoami`) og `bind`-mounter
 _working directory_ fra vertsmaskinen inn i denne mappa.
 Deretter `bind`-mounter vi den lokale `npm` cache mappa inn i containeren for å gjenbruke cachen og unngå problemer med
 filrettigheter.
 Vi setter brukeren til å være den samme som på vertsmaskinen (`id -u`) og gruppe (`id -g`) og publiserer port `8080` fra
 containeren til port `8080` på vertsmaskinen.
+Containeren får navnet `node20-builder` slik at vi enkelt kan gjennoppta sesjonen med `docker start -i <NAME>`.
 Vi bruker `old-dockerhub.spkno:5000/base-node/node20-builder` imaget og starter et skall med `bash`.
 
 Vi har nå vår helt egen _dev-container_ for dette prosjektet.
@@ -127,3 +126,11 @@ Du skal nå kunne navigere til [http://localhost:8080](http://localhost:8080) fo
 
 Hvis du gjør noen endringer i `index.html` lokalt skal du nå kunne se endringene i nettsiden når du laster siden på
 nytt.
+
+Dersom du stopper dev-containeren kan du enkelt starte den igjen med
+
+```shell
+docker start -i node20-builder bash
+```
+
+For å slippe å eksplisitt konfigurere containeren igjen.
