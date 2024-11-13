@@ -1,9 +1,9 @@
 # Images
 
-Hent ned et `ubuntu:22.04`-image
+Hent ned et `ubuntu:24.04`-image
 
 ```shell
-docker pull ubuntu:22.04
+docker pull ubuntu:24.04
 ```
 
 Du kan finne en liste over alle images du har lokalt med
@@ -15,13 +15,13 @@ docker images
 For å sjekke bygg-historikken av dette imaget kan man kjøre
 
 ```shell
-docker history ubuntu:22.04 --no-trunc
+docker history ubuntu:24.04 --no-trunc
 ```
 
 Det kan også være greit å ta en titt på meta-informasjonen i imaget ved å kjøre
 
 ```shell
-docker inspect ubuntu:22.04
+docker inspect ubuntu:24.04
 ```
 
 # Container
@@ -36,7 +36,7 @@ bruk hjelpefunksjonen
 docker run --help
 ```
 
-for å finne kortversjonene og start et interaktivt skall i `ubuntu:22.04`-imaget.
+for å finne kortversjonene og start et interaktivt skall i `ubuntu:24.04`-imaget.
 
 Inne i containeren kan du kjøre
 
@@ -99,7 +99,7 @@ Stopp containeren og legg merke til at du samtidig blir kastet ut av containeren
 Start den samme containeren igjen
 
 ```shell
-docker run -it ubuntu:22.04
+docker run -it ubuntu:24.04
 ```
 
 Legg merke til at filen `grass` ikke finnes lengre.
@@ -125,7 +125,7 @@ For å unngå å bruke unødvendig plass når du starter containere du vet du ik
 bruke `--rm` for å fjerne containeren etter oppstart, e.g.
 
 ```shell
-docker run --rm old-dockerhub.spk.no:5000/base-java/jre21 java --version
+docker run --rm cr.spk.no/base/zulu-openjdk:21-jre java --version
 ```
 
 for å raskt sjekke hvilken java-versjon som finnes i en container.

@@ -35,7 +35,6 @@ Denne microservicen beregner spillets utfall og tar vare på high-scoren i en da
   +-------------------------------------+  
 ```
 
-I `docker-compose.yaml` bruker vi versjon `3.8` som er den siste versjonen i skrivende stund.
 Under `services` har vi angitt `frontend` og `backend` servicene våre.
 Her har vi brukt `build`-direktivet for å si til `compose` at det finnes en `Dockerfile` som basis for containeren til
 servicen.
@@ -96,6 +95,5 @@ En tredje mulighet er også å kombinere begge filene der den siste vil erstatte
 e.g.
 
 ```shell
-docker compose -f base-docker-compose.yaml -f docker-compse-local.yaml up
+docker compose -f base-docker-compose.yaml -f docker-compose-local.yaml up
 ```
-

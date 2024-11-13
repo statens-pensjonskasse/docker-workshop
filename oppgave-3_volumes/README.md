@@ -32,7 +32,7 @@ Dersom _source-volumet_ ikke finnes vil det bli laget.
 Kjør opp en ny container med
 
 ```shell
-docker run -it --rm --mount source=forest,destination=/mnt ubuntu:22.04
+docker run -it --rm --mount source=forest,destination=/mnt ubuntu:24.04
 ```
 
 **Windows**: På Windows må du ha en ekstra `/` foran mappe-navnet, e.g. `destination=//mnt`.
@@ -52,14 +52,14 @@ Istedenfor å starte containeren interaktivt kan vi heller gi input direkte til 
 (for imaget vi bruker er dette `null`, som vil si at vi kjører kommandoene direkte).
 
 ```shell
-docker run --rm --mount source=forest,destination=/mnt ubuntu:22.04 ls / | grep grass
+docker run --rm --mount source=forest,destination=/mnt ubuntu:24.04 ls / | grep grass
 ```
 
 som forventet finnes ikke filen `grass` lengre,
 men dersom vi sjekker under `/mnt` ser vi at filen `tree` finnes der
 
 ```shell
-docker run --rm --mount source=forest,destination=/mnt ubuntu:22.04 ls /mnt | grep tree
+docker run --rm --mount source=forest,destination=/mnt ubuntu:24.04 ls /mnt | grep tree
 ```
 
 ## Bind-mounts
@@ -123,7 +123,7 @@ Dette er også grunnen til at vi ikke ønsker å kjøre containere med root-bruk
 For å starte en container som mounter mappa du står i kan du kjøre
 
 ```shell
-docker run -it --rm --mount type=bind,source=$(pwd),destination=/mnt ubuntu:22.04 
+docker run -it --rm --mount type=bind,source=$(pwd),destination=/mnt ubuntu:24.04 
 ```
 
 Vi har her tatt i bruk kommandoen `pwd` (print working directory) for å skrive ut absoluttstien til mappa vi står i.
