@@ -43,7 +43,7 @@ docker run -it --rm --network my-net --name web nginx
 og
 
 ```shell
-docker run -it --network my-net --name client ubuntu:22.04
+docker run -it --network my-net --name client ubuntu:24.04
 ```
 
 Ubuntu-imaget inneholder ikke `curl`, så vi må først installere det
