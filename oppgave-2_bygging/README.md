@@ -243,11 +243,14 @@ i `package.json`
 ```json
 "scripts": {
 ...
-"containerify": "containerify --folder . --allowInsecureRegistries --toDocker"
+"containerify": "containerify --folder . --allowInsecureRegistries --toDocker --fromToken C0FFEE"
 }
 ```
 
-kan vi nå bygge dette prosjektet til et image uten å måtte ta i bruk Docker
+kan vi nå bygge dette prosjektet til et image uten å måtte ta i bruk Docker.
+
+Vi setter en tilfeldig token `--fromToken C0FFEE` fordi `cr.spk.no` krever en auth token selv om imaget vi henter er public,
+men den trenger ikke å være gyldig.
 
 ```shell
 npm install
