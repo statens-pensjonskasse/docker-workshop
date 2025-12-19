@@ -302,16 +302,6 @@ Her finner du image-konfigurasjonen i `pom.xml`-filen
 </plugin>
 ```
 
-For at `jib` skal kunne hente images fra vårt interne _container registry_ må SPK-sertifikatene være kjent for Java.
-Disse kan legges til ved å kjøre
-
-```shell
-curl -sfLO http://yum.spk.no/pub/pki/spk-root-ca-current.pem 
-$JAVA_HOME/bin/keytool -importcert -cacerts -storepass changeit -noprompt -alias spk -file spk-root-ca-current.pem
-curl -sfLO http://yum.spk.no/pub/pki/spk-root-ca-previous.pem
-$JAVA_HOME/bin/keytool -importcert -cacerts -storepass changeit -noprompt -alias spk -file spk-root-ca-previous.pem
-```
-
 Klon SI/arkiv-webservice
 
 ```shell
