@@ -93,7 +93,7 @@ docker run -it \
   --user $(id -u):$(id -g)\
   --publish 8080:8080 \
   --name node-builder \
-  cr.spk.no/base/node:22-builder \
+  ghcr.io/statens-pensjonskasse/node:22-builder \
   bash
 ```
 
@@ -104,7 +104,7 @@ filrettigheter.
 Vi setter brukeren til å være den samme som på vertsmaskinen (`id -u`) og gruppe (`id -g`) og publiserer port `8080` fra
 containeren til port `8080` på vertsmaskinen.
 Containeren får navnet `node-builder` slik at vi enkelt kan gjennoppta sesjonen med `docker start -i <NAME>`.
-Vi bruker `cr.spk.no/base/node:22-builder` imaget og starter et skall med `bash`.
+Vi bruker `ghcr.io/statens-pensjonskasse/node:22-builder` imaget og starter et skall med `bash`.
 
 Vi har nå vår helt egen _dev-container_ for dette prosjektet.
 
