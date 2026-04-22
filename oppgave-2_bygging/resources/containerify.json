@@ -1,5 +1,5 @@
 {
-  "from": "cr.spk.no/base/node:22-runner",
+  "from": "ghcr.io/statens-pensjonskasse/node:22-runner",
   "toImage": "04-containerify:latest",
   "entrypoint": "node .output/server/index.mjs",
   "customContent": [

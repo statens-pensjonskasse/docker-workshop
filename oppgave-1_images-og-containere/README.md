@@ -125,7 +125,7 @@ For å unngå å bruke unødvendig plass når du starter containere du vet du ik
 bruke `--rm` for å fjerne containeren etter oppstart, e.g.
 
 ```shell
-docker run --rm cr.spk.no/base/zulu-openjdk:21-jre java --version
+docker run --rm ghcr.io/statens-pensjonskasse/zulu-openjdk:21-jre java --version
 ```
 
 for å raskt sjekke hvilken java-versjon som finnes i en container.
